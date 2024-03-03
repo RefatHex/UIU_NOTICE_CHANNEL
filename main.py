@@ -1,8 +1,7 @@
-import time
-from TOKEN import TOKEN, BOT_USERNAME
+from TOKEN import TOKEN
 from scraper import get_notices
 from telegram import Update
-from telegram.ext import Application, CommandHandler, MessageHandler, filters, ContextTypes
+from telegram.ext import Application, CommandHandler, ContextTypes
 
 
 async def start_command(update: Update, context: ContextTypes.DEFAULT_TYPE):
@@ -14,12 +13,8 @@ async def start_command(update: Update, context: ContextTypes.DEFAULT_TYPE):
         await update.message.reply_text("Hello again!")
 
 
-async def help_command(update: Update, context: ContextTypes.DEFAULT_TYPE):
-    await update.message.reply_text("contact admin")
-
-
-async def get_updates(update: Update, context: ContextTypes.DEFAULT_TYPE):
-    await handle_auto_update(update, context)
+async def author_command(update: Update, context: ContextTypes.DEFAULT_TYPE):
+    await update.message.reply_text("Author of the bot is \n https://github.com/refathex ")
 
 
 async def handle_auto_update(update: Update, context: ContextTypes.DEFAULT_TYPE):
@@ -47,9 +42,7 @@ if __name__ == '__main__':
 
     # commands
     app.add_handler(CommandHandler('start', start_command))
-    app.add_handler(CommandHandler('help', help_command))
-    app.add_handler(CommandHandler(
-        'get_updates', get_updates))
+    app.add_handler(CommandHandler('author', author_command))
 
     # error
     app.add_error_handler(error)
